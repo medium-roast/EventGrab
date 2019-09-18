@@ -160,7 +160,7 @@ public class MySQLConnection implements DBConnection {
 				return date1.length() > 0 ? -1 : 1; 
 			}			
 		});
-		// Save TicketMaster data to DB if logged-in
+		// Save TicketMaster data to DB
 		for (Item item : items) {
 			saveItem(item);
 		}
