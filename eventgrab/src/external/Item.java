@@ -16,6 +16,7 @@ public class Item {
 	private String imageUrl;
 	private String url;
 	private double distance;
+	private String date;
 	
 	private Item(ItemBuilder builder) {
 		this.itemId = builder.itemId;
@@ -26,6 +27,7 @@ public class Item {
 		this.imageUrl = builder.imageUrl;
 		this.url = builder.url;
 		this.distance = builder.distance;
+		this.date = builder.date;
 	}
 	
 	public String getItemId() {
@@ -60,6 +62,10 @@ public class Item {
 		return distance;
 	}
 	
+	public String getDate() {
+		return date;
+	}
+	
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
 		try {
@@ -71,6 +77,7 @@ public class Item {
 			obj.put("image_url", imageUrl);
 			obj.put("url", url);
 			obj.put("distance", distance);
+			obj.put("date", date);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -86,6 +93,7 @@ public class Item {
 		private String imageUrl;
 		private String url;
 		private double distance;
+		private String date;
 		
 		public Item build() {
 			return new Item(this);
@@ -121,6 +129,10 @@ public class Item {
 		
 		public void setDistance(double distance) {
 			this.distance = distance;
+		}
+		
+		public void setDate(String date) {
+			this.date = date;
 		}
 	}
 }

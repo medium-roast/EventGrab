@@ -50,8 +50,8 @@ public class GeoRecommendation {
 				}
 			}
 		}
-
-		connection.close();
+		
+		connection.close();		
 		return recommendedItems;
 	}
 }

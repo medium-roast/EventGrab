@@ -564,6 +564,13 @@
     });
     title.innerHTML = item.name;
     section.appendChild(title);
+    
+    // date
+    var date = $create('p', {
+      className: 'item-date'
+    });
+    date.innerHTML = item.date;
+    section.appendChild(date);
 
     // category
     var category = $create('p', {
