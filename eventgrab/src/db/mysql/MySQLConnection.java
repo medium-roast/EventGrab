@@ -90,6 +90,7 @@ public class MySQLConnection implements DBConnection {
 					builder.setUrl(rs.getString("url"));
 					builder.setCategories(getCategories(itemId));
 					builder.setDistance(rs.getDouble("distance"));
+					builder.setDate(rs.getString("date"));
 					builder.setRating(rs.getDouble("rating"));
 					
 					favoriteItems.add(builder.build());
@@ -148,6 +149,17 @@ public class MySQLConnection implements DBConnection {
 		// Get TicketMaster data.
 		TicketMasterClient client = new TicketMasterClient();
 		List<Item> items = client.search(lat, lon, term);
+		Collections.sort(items, new Comparator<Item>() {
+			@Override
+			public int compare(Item o1, Item o2) {
+				String date1 = o1.getDate();
+				String date2 = o2.getDate();
+				if (date1.length() > 0 && date2.length() > 0) {
+					return date1.compareTo(date2);
+				}
+				return date1.length() > 0 ? -1 : 1; 
+			}			
+		});
 		// Save TicketMaster data to DB if logged-in
 		for (Item item : items) {
 			saveItem(item);
@@ -163,7 +175,7 @@ public class MySQLConnection implements DBConnection {
 			return;
 		}
 		try {
-			String sql = "INSERT IGNORE INTO items VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT IGNORE INTO items VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, item.getItemId());
 			ps.setString(2, item.getName());
@@ -172,6 +184,7 @@ public class MySQLConnection implements DBConnection {
 			ps.setString(5, item.getImageUrl());
 			ps.setString(6, item.getUrl());
 			ps.setDouble(7, item.getDistance());
+			ps.setString(8, item.getDate());
 			ps.execute();
 
 			sql = "INSERT IGNORE INTO categories VALUES(?, ?)";

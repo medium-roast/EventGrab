@@ -19,6 +19,7 @@ public class TicketMasterClient {
 	private static final String DEFAULT_KEYWORD = "event";
 	private static final int DEFAULT_RADIUS = 50;
 	private static final String API_KEY = "VvYxAiWOj0cQAEOchKE7SWYqzWqFATOz";
+	private static final int DEFAULT_PAGE_SIZE = 30;
 
 	public List<Item> search(double lat, double lon, String keyword) {
 		// Construct the URL.
@@ -30,7 +31,8 @@ public class TicketMasterClient {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String query = String.format("apikey=%s&latlong=%s,%s&keyword=%s&radius=%s", API_KEY, lat, lon, keyword, DEFAULT_RADIUS);
+		String query = String.format("apikey=%s&latlong=%s,%s&keyword=%s&radius=%s&size=%s", 
+				API_KEY, lat, lon, keyword, DEFAULT_RADIUS, DEFAULT_PAGE_SIZE);
 		String url = HOST + PATH + "?" + query;
 		
 		StringBuilder responseBody = new StringBuilder();
@@ -96,6 +98,7 @@ public class TicketMasterClient {
 			builder.setAddress(getAddress(event));
 			builder.setCategories(getCategories(event));
 			builder.setImageUrl(getImageUrl(event));
+			builder.setDate(getDate(event));
 			
 			Item item = builder.build();
 			itemList.add(item);
@@ -106,6 +109,17 @@ public class TicketMasterClient {
 	/**
 	 * Helper methods for getItemList()
 	 */
+	private String getDate(JSONObject event) throws JSONException {
+		if (!event.isNull("dates")) {
+			JSONObject dates = event.getJSONObject("dates");
+			if (!dates.isNull("start")) {
+				JSONObject start = dates.getJSONObject("start");
+				return start.getString("localDate");
+			}
+		}
+		return "";
+	}
+	
 	private String getAddress(JSONObject event) throws JSONException {
 		if (!event.isNull("_embedded")) {
 			JSONObject embedded = event.getJSONObject("_embedded");
