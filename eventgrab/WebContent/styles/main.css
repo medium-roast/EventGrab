@@ -99,7 +99,7 @@ ul {
 }
 
 .container>header span {
-	color: #FBAF41;
+	color: #FF5245;
 }
 
 /**
@@ -336,8 +336,12 @@ footer p {
 }
 
 footer p.title {
-	font-size: 1.2em;
+	font-size: 1.5em;
 	padding: 15px;
+}
+
+footer p.subtitle {
+	font-size: 1.2em;
 }
 
 footer ul {
