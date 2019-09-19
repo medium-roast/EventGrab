@@ -336,12 +336,13 @@ footer p {
 }
 
 footer p.title {
-	font-size: 1.5em;
+	font-size: 1.6em;
 	padding: 15px;
 }
 
 footer p.subtitle {
 	font-size: 1.2em;
+	padding: 2px;
 }
 
 footer ul {
