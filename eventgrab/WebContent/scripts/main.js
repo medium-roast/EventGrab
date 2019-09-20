@@ -201,7 +201,7 @@
   }
 
   function showLoginError() {
-    document.querySelector('#login-error').innerHTML = 'Invalid username or password';
+    document.querySelector('#login-error').innerHTML = 'Invalid username or password.';
   }
 
   function clearLoginError() {
@@ -219,12 +219,12 @@
     var lastName = document.querySelector('#register-last-name').value;
     
     if (username === "" || password == "" || firstName === "" || lastName === "") {
-    	showRegisterResult('Please fill in all fields');
+    	showRegisterResult('Please fill in all fields.');
     	return
     }
     
-    if (username.match(/^[a-z0-9_]+$/) === null) {
-    	showRegisterResult('Invalid username');
+    if (username.match(/^[A-Za-z0-9_]+$/) === null) {
+    	showRegisterResult('Invalid username. Only letters, digits and underlines allowed.');
     	return
     }
     
@@ -246,15 +246,15 @@
 
         // successfully logged in
         if (result.status === 'OK') {
-        	showRegisterResult('Succesfully registered');
+        	showRegisterResult('Succesfully registered. Please login.');
         } else {
-        	showRegisterResult('User already existed');
+        	showRegisterResult('User already existed.');
         }
       },
 
       // error
       function() {
-    	  showRegisterResult('Failed to register');
+    	  showRegisterResult('Failed to register.');
       },
       true);
   }
