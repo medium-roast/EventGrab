@@ -1,9 +1,10 @@
 package db;
 
-import db.mysql.*;
+import db.mongodb.MongoDBConnection;
+import db.mysql.MySQLConnection;
 
 public class DBConnectionFactory {
-	// This should change based on the pipeline.
+	// This should change based on the pipeline. Both MySQL and MongoDB connections are implemented. 
 	private static final String DEFAULT_DB = "mysql";
 	
 	public static DBConnection getConnection(String db) {
@@ -11,14 +12,13 @@ public class DBConnectionFactory {
 		case "mysql":
 			return new MySQLConnection();
 		case "mongodb":
-			// return new MongoDBConnection();
-			return null;
+			return new MongoDBConnection();
 		default:
 			throw new IllegalArgumentException("Invalid db:" + db);
 		}
-
 	}
 
+	// Default database connection.
 	public static DBConnection getConnection() {
 		return getConnection(DEFAULT_DB);
 	}

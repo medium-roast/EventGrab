@@ -41,7 +41,7 @@ public class SearchItem extends HttpServlet {
 			return;
 		}
 		
-		DBConnection conn = DBConnectionFactory.getConnection("mysql");				
+		DBConnection conn = DBConnectionFactory.getConnection();				
 		Set<String> favoritedItemIds = new HashSet<>();
 		HttpSession session = request.getSession(false);
 		if (session != null) {
@@ -67,18 +67,5 @@ public class SearchItem extends HttpServlet {
 			e.printStackTrace();
 		}		
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
 
-/** 
- * test url: 
- * http://localhost:8080/Volare/search?lat=37.38&lon=-122.08&keyword=soccer
- */

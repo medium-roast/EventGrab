@@ -40,7 +40,7 @@ public class ItemHistory extends HttpServlet {
 			return;
 		}
 		
-		DBConnection dbConnection = DBConnectionFactory.getConnection("mysql");
+		DBConnection dbConnection = DBConnectionFactory.getConnection();
 		try {
 			String userId = request.getParameter("user_id");
 			Set<Item> items = dbConnection.getFavoriteItems(userId);
@@ -67,7 +67,7 @@ public class ItemHistory extends HttpServlet {
 			return;
 		}
 		
-		DBConnection dbConnnection = DBConnectionFactory.getConnection("mysql");
+		DBConnection dbConnnection = DBConnectionFactory.getConnection();
 		try {
 			JSONObject input = RpcHelper.readJSONObject(request);
 			String userId = input.getString("user_id");

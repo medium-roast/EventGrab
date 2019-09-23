@@ -1,7 +1,7 @@
 (function() {
 
   /**
-   * Variables
+   * Variables with initial values
    */
   var user_id = '1111';
   var user_fullname = 'John';
