@@ -64,6 +64,8 @@ public class Login extends HttpServlet {
 
 			JSONObject obj = new JSONObject();
 			if (dbConnection.verifyLogin(userId, password)) {
+				// Create the new HttpSession object and also add a Cookie to the response object with name JSESSIONID and value as session id. 
+				// This cookie is used to identify the HttpSession object in further requests from client.
 				HttpSession session = request.getSession();  // No input parameter: create a new session if none exists.
 				session.setAttribute("user_id", userId);
 				//Specify the time, in seconds, between client requests before the servlet container will invalidate this session.
